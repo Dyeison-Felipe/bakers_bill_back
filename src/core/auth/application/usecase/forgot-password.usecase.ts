@@ -1,4 +1,5 @@
 import { UserRepository } from '@/core/user/domain/repositories/user.repository';
+import { ID_USER_DEFAULT } from '@/shared/application/constants/id-user-default';
 import { PROVIDERS } from '@/shared/application/constants/providers';
 import { EnvConfig } from '@/shared/application/env-config/env-config';
 import { BadRequestError } from '@/shared/application/errors/bad-request-error';
@@ -37,6 +38,7 @@ export class ForgotPasswordUseCase implements UseCase<Input, Output> {
     try {
       const code = randomInt(100000, 999999).toString();
       user.updateResetPasswordCode(code);
+      user.update({...user, updatedBy: ID_USER_DEFAULT})
       await this.userRepository.update(user);
       await this.mailService.sendMail({
         to: user.email,

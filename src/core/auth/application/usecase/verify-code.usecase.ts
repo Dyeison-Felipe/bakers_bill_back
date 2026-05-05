@@ -1,11 +1,13 @@
 import { UserRepository } from '@/core/user/domain/repositories/user.repository';
 import { AuthConstants } from '@/shared/application/constants/auth-constants';
+import { ID_USER_DEFAULT } from '@/shared/application/constants/id-user-default';
 import { PROVIDERS } from '@/shared/application/constants/providers';
 import { CookieOptions } from '@/shared/application/cookies/cookies';
 import { EnvConfig } from '@/shared/application/env-config/env-config';
 import { BadRequestError } from '@/shared/application/errors/bad-request-error';
 import { JwtService } from '@/shared/application/jwt/jwt.service';
 import { UseCase } from '@/shared/application/usecase/usecase';
+import { Transactional } from '@/shared/infra/database/typeorm/decorators/transactional.decorator';
 import { Inject } from '@nestjs/common';
 
 type Input = {
@@ -14,9 +16,7 @@ type Input = {
   setCookie: (key: string, value: string, options?: CookieOptions) => void;
 };
 
-type Output = {
-  token: string
-};
+type Output = void;
 
 export class VerifyCodeUseCase implements UseCase<Input, Output> {
   constructor(
@@ -27,6 +27,7 @@ export class VerifyCodeUseCase implements UseCase<Input, Output> {
     private readonly envConfigService: EnvConfig,
   ) { }
 
+  @Transactional()
   async execute({ code, email, setCookie }: Input): Promise<Output> {
     const user = await this.userRepository.findByCode(code, email);
 
@@ -42,25 +43,30 @@ export class VerifyCodeUseCase implements UseCase<Input, Output> {
       );
     }
 
-    const { token } = await this.jwtService.generateJwt(user, { secret: this.envConfigService.getJwtSecretForgotPassword(), expiresIn: this.envConfigService.getExpiresInSecondsForgotPassword() });
+    user.updateResetPasswordCode();
+    user.update({ ...user, updatedBy: ID_USER_DEFAULT })
 
-    const jwtExpiresInSeconds = this.envConfigService.getJwtExpiresInSeconds();
+    await this.userRepository.update(user);
+    try {
 
-    const options: CookieOptions = {
-      httpOnly: true,
-      maxAge: jwtExpiresInSeconds,
-      path: '/',
-      domain: this.envConfigService.getCookieDomain(),
-      secure: this.envConfigService.getCookieSecure(),
-      sameSite: this.envConfigService.getCookieSameSite(),
-    };
+      const { token } = await this.jwtService.generateJwt(user, { secret: this.envConfigService.getJwtSecretForgotPassword(), expiresIn: this.envConfigService.getExpiresInSecondsForgotPassword() });
 
-    setCookie(AuthConstants.tokenForgotPassword, token, options);
+      const jwtExpiresInSeconds = this.envConfigService.getJwtExpiresInSeconds();
 
-    const output: Output = {
-      token: token,
-    };
+      const options: CookieOptions = {
+        httpOnly: true,
+        maxAge: jwtExpiresInSeconds,
+        path: '/',
+        domain: this.envConfigService.getCookieDomain(),
+        secure: this.envConfigService.getCookieSecure(),
+        sameSite: this.envConfigService.getCookieSameSite(),
+      };
 
-    return output;
+      setCookie(AuthConstants.tokenForgotPassword, token, options);
+
+    } catch (e) {
+      throw new BadRequestError(`Ocorreu um erro ao verificar o código`)
+    }
+
   }
 }
