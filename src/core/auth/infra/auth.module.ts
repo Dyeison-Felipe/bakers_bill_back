@@ -15,6 +15,7 @@ import { PermissionGuard } from './guard/permission.guard';
 import { ForgotPasswordUseCase } from '../application/usecase/forgot-password.usecase';
 import { MailService } from '@/shared/application/mail/mail.service';
 import { VerifyCodeUseCase } from '../application/usecase/verify-code.usecase';
+import { UpdatePasswordUseCase } from '../application/usecase/update-password.usecase';
 
 @Global()
 @Module({
@@ -60,16 +61,40 @@ import { VerifyCodeUseCase } from '../application/usecase/verify-code.usecase';
       useFactory: (
         userRepository: UserRepository,
         jwtService: JwtService,
-        envConfigService: EnvConfig,) => {
-        return new VerifyCodeUseCase(userRepository, jwtService, envConfigService);
+        envConfigService: EnvConfig,
+      ) => {
+        return new VerifyCodeUseCase(
+          userRepository,
+          jwtService,
+          envConfigService,
+        );
       },
       inject: [
         PROVIDERS.USER_REPOSITORY,
         PROVIDERS.JWT_SERVICE,
         PROVIDERS.ENV_CONFIG_SERVICE,
-      ]
-    }
+      ],
+    },
+    {
+      provide: UpdatePasswordUseCase,
+      useFactory: (
+        userRepository: UserRepository,
+        hashService: HashService,
+        jwtService: JwtService,
+      ) => {
+        return new UpdatePasswordUseCase(
+          userRepository,
+          hashService,
+          jwtService,
+        );
+      },
+      inject: [
+        PROVIDERS.USER_REPOSITORY,
+        PROVIDERS.HASH_SERVICE,
+        PROVIDERS.JWT_SERVICE,
+      ],
+    },
   ],
   exports: [PROVIDERS.CASL_ABILITY_SERVICE],
 })
-export class AuthModule { }
+export class AuthModule {}

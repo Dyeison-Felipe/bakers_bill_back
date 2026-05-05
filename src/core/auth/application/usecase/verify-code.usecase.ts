@@ -25,33 +25,38 @@ export class VerifyCodeUseCase implements UseCase<Input, Output> {
     @Inject(PROVIDERS.JWT_SERVICE) private readonly jwtService: JwtService,
     @Inject(PROVIDERS.ENV_CONFIG_SERVICE)
     private readonly envConfigService: EnvConfig,
-  ) { }
+  ) {}
 
   @Transactional()
   async execute({ code, email, setCookie }: Input): Promise<Output> {
     const user = await this.userRepository.findByCode(code, email);
 
     if (!user) {
-      throw new BadRequestError(
-        `Código incorreto`,
-      );
-    };
+      throw new BadRequestError(`Código incorreto`);
+    }
 
-    if (user.passwordResetCode !== code) {
-      throw new BadRequestError(
-        `Código incorreto`,
-      );
+    const now = new Date();
+
+    if (
+      user.expiredAtCode &&
+      (user.passwordResetCode !== code || now > user.expiredAtCode)
+    ) {
+      throw new BadRequestError(`Código incorreto`);
     }
 
     user.updateResetPasswordCode();
-    user.update({ ...user, updatedBy: ID_USER_DEFAULT })
+    user.update({ ...user, updatedBy: ID_USER_DEFAULT });
 
     await this.userRepository.update(user);
     try {
 
-      const { token } = await this.jwtService.generateJwt(user, { secret: this.envConfigService.getJwtSecretForgotPassword(), expiresIn: this.envConfigService.getExpiresInSecondsForgotPassword() });
+      const { token } = await this.jwtService.generateJwt(user, {
+        secret: this.envConfigService.getJwtSecretForgotPassword(),
+        expiresIn: this.envConfigService.getExpiresInSecondsForgotPassword(),
+      });
 
-      const jwtExpiresInSeconds = this.envConfigService.getJwtExpiresInSeconds();
+      const jwtExpiresInSeconds =
+        this.envConfigService.getJwtExpiresInSeconds();
 
       const options: CookieOptions = {
         httpOnly: true,
@@ -63,10 +68,8 @@ export class VerifyCodeUseCase implements UseCase<Input, Output> {
       };
 
       setCookie(AuthConstants.tokenForgotPassword, token, options);
-
     } catch (e) {
-      throw new BadRequestError(`Ocorreu um erro ao verificar o código`)
+      throw new BadRequestError(`Ocorreu um erro ao verificar o código`);
     }
-
   }
 }

@@ -1,5 +1,14 @@
-import { Body, Controller, HttpCode, HttpStatus, Post, Query, Req, Res } from '@nestjs/common';
-import type { FastifyReply } from 'fastify';
+import {
+  Body,
+  Controller,
+  HttpCode,
+  HttpStatus,
+  Post,
+  Query,
+  Req,
+  Res,
+} from '@nestjs/common';
+import type { FastifyReply, FastifyRequest } from 'fastify';
 import { LoginDto } from '../dtos/login.dto';
 import {
   ApiBody,
@@ -17,6 +26,9 @@ import { ForgotPasswordDto } from '../dtos/forgot-password.dto';
 import { VerifyCodeDto } from '../dtos/verify-code.dto';
 import { VerifyCodeUseCase } from '../../application/usecase/verify-code.usecase';
 import { repl } from '@nestjs/core';
+import { UpdatePasswordUseCase } from '../../application/usecase/update-password.usecase';
+import { UpdatePasswordDto } from '../dtos/update-password.dto';
+import { AuthConstants } from '@/shared/application/constants/auth-constants';
 
 @ApiTags('Auth')
 @Controller('/v1/auth')
@@ -25,7 +37,8 @@ export class AuthController {
     private readonly loginUseCase: LoginUseCase,
     private readonly forgotPasswordUseCase: ForgotPasswordUseCase,
     private readonly verifyCodeUseCase: VerifyCodeUseCase,
-  ) { }
+    private readonly updatePasswordUseCase: UpdatePasswordUseCase,
+  ) {}
 
   @Post('/login')
   @Public()
@@ -58,10 +71,24 @@ export class AuthController {
 
   @HttpCode(HttpStatus.OK)
   @Post('verify-code')
-  async verifyCode(@Res({ passthrough: true }) reply: FastifyReply, @Body() dto: VerifyCodeDto): Promise<void> {
+  @Public()
+  async verifyCode(
+    @Res({ passthrough: true }) reply: FastifyReply,
+    @Body() dto: VerifyCodeDto,
+  ): Promise<void> {
     await this.verifyCodeUseCase.execute({
       ...dto,
-      setCookie: reply.setCookie.bind(reply)
-    })
+      setCookie: reply.setCookie.bind(reply),
+    });
+  }
+
+  @HttpCode(HttpStatus.OK)
+  @Post('update-password')
+  @Public()
+  async updatePassword(
+    @Body() dto: UpdatePasswordDto,
+    @Req() req: FastifyRequest,
+  ): Promise<void> {
+    await this.updatePasswordUseCase.execute({ password: dto.password, req });
   }
 }
