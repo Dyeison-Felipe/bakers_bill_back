@@ -13,7 +13,7 @@ export class PermissionRepositoryMappper {
     return PermissionSchema.with({
       id: entity.id,
       action: entity.action,
-      subject: entity.action,
+      subject: entity.subject,
     });
   }
 }

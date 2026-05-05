@@ -11,7 +11,7 @@ export class PermissionEntity {
   subject: string;
 
   constructor(props: PermissionProps) {
-    this.id = crypto.randomUUID()
+    this.id = props.id ?? crypto.randomUUID()
     this.action = props.action;
     this.subject = props.subject
   }

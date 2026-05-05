@@ -41,8 +41,13 @@ export class CreateTableUsers1771290902167 implements MigrationInterface {
             isNullable: false,
           },
           {
-            name: 'recover_password_jwt',
+            name: 'password_reset_code',
             type: 'text',
+            isNullable: true,
+          },
+          {
+            name: 'expired_at_code',
+            type: 'timestamp',
             isNullable: true,
           },
           {

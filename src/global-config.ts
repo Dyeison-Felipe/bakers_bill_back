@@ -10,6 +10,8 @@ import { GlobalStringLengthPipe } from '@/shared/infra/pipes/globalmax-lenght.pi
 import { ValidationPipe } from '@nestjs/common';
 import fastifyCookie from '@fastify/cookie';
 import { EntityValidationErrorFilter } from './shared/infra/exeption-filters/validation-error.filter';
+import { join } from 'node:path';
+import fastifyStatic from '@fastify/static';
 
 export async function globalConfig(
   app: NestFastifyApplication,
@@ -38,7 +40,7 @@ export async function globalConfig(
   });
 
   // Cookies
-    await app.register(fastifyCookie, {
+  await app.register(fastifyCookie, {
     secret: envConfig.getCookieSecret(),
   });
 
@@ -48,8 +50,8 @@ export async function globalConfig(
       whitelist: true,
       transform: true,
     }),
-    new GlobalStringLengthPipe()
-  )
+    new GlobalStringLengthPipe(),
+  );
 
   // Global Errors
   app.useGlobalFilters(
@@ -58,6 +60,13 @@ export async function globalConfig(
     new ForbiddenErrorFilter(),
     new NotFoundErrorFilter(),
     new UnauthorizedErrorFilter(),
-    new EntityValidationErrorFilter()
+    new EntityValidationErrorFilter(),
   );
+
+  await app.register(fastifyStatic, {
+    root: join(__dirname, '..', 'src', 'public', 'images'),
+    prefix: '/images/',
+    wildcard: false,
+    serve: true,
+  });
 }

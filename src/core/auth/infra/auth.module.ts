@@ -12,6 +12,8 @@ import { EnvConfig } from '@/shared/application/env-config/env-config';
 import { PROVIDERS } from '@/shared/application/constants/providers';
 import { CaslAbilityService } from './service/casl-ability.service';
 import { PermissionGuard } from './guard/permission.guard';
+import { ForgotPasswordUseCase } from '../application/usecase/forgot-password.usecase';
+import { MailService } from '@/shared/application/mail/mail.service';
 
 @Global()
 @Module({
@@ -41,6 +43,16 @@ import { PermissionGuard } from './guard/permission.guard';
         PROVIDERS.HASH_SERVICE,
         PROVIDERS.ENV_CONFIG_SERVICE,
       ],
+    },
+    {
+      provide: ForgotPasswordUseCase,
+      useFactory: (
+        userRepository: UserRepository,
+        mailService: MailService,
+      ) => {
+        return new ForgotPasswordUseCase(userRepository, mailService);
+      },
+      inject: [PROVIDERS.USER_REPOSITORY, PROVIDERS.MAIL_SERVICE],
     },
   ],
   exports: [PROVIDERS.CASL_ABILITY_SERVICE],

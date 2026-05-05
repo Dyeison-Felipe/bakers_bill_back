@@ -10,7 +10,7 @@ export type UserProps = {
   password: string;
   active: boolean;
   passwordResetCode?: string | null;
-  passwordResetCodeExpiresAt?: Date | null;
+  expiredAtCode?: Date | null;
   email: string;
   createdBy: string;
   updatedBy: string;
@@ -35,9 +35,9 @@ type UpdateUserProps = {
 type UpdatePassword = {
   password: string;
   updatedBy?: string;
-}
+};
 
-export interface UserEntity extends UserProps { }
+export interface UserEntity extends UserProps {}
 
 @Data()
 export class UserEntity extends BaseEntity<UserProps> {
@@ -48,7 +48,7 @@ export class UserEntity extends BaseEntity<UserProps> {
       password: props.password,
       active: true,
       email: props.email,
-      passwordResetCodeExpiresAt: null,
+      expiredAtCode: null,
       createdBy: props.createdBy ?? ID_USER_DEFAULT,
       updatedBy: props.updatedBy ?? ID_USER_DEFAULT,
     });
@@ -82,10 +82,10 @@ export class UserEntity extends BaseEntity<UserProps> {
   updateResetPasswordCode(code?: string): void {
     if (code) {
       this.passwordResetCode = code;
-      this.passwordResetCodeExpiresAt = new Date();
+      this.expiredAtCode = new Date(Date.now() + 10 * 60 * 1000);
       return;
     }
-    this.passwordResetCodeExpiresAt = null
+    this.expiredAtCode = null;
     this.passwordResetCode = null;
   }
 

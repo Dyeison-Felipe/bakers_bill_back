@@ -12,6 +12,8 @@ export class UserRepositoryMapper {
       password: schema.password,
       active: schema.active,
       email: schema.email,
+      expiredAtCode: schema.expiredAtCode,
+      passwordResetCode: schema.passwordResetCode,
       auditable: {
         createdAt: schema.createdAt,
         updatedAt: schema.updatedAt,
@@ -32,6 +34,8 @@ export class UserRepositoryMapper {
       password: entity.password,
       active: entity.active,
       email: entity.email,
+      expiredAtCode: entity.expiredAtCode,
+      passwordResetCode: entity.passwordResetCode ?? null,
       createdAt: entity.auditable?.createdAt,
       updatedAt: entity.auditable?.updatedAt,
       deletedAt: entity.auditable?.deletedAt,

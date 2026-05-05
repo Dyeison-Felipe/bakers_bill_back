@@ -18,10 +18,16 @@ export class UserSchema extends BaseSchema {
   password: string;
 
   @Column()
+  email: string;
+
+  @Column()
   active: boolean;
 
-  @Column({name: 'recover_password_jwt', type: 'text', nullable: true})
-  recoverPasswordJwt?: string;
+  @Column({name: 'password_reset_code', type: 'varchar', nullable: true, length: 6})
+  passwordResetCode?: string | null;
+
+  @Column({name: 'expired_at_code', type: 'timestamp', nullable: true})
+  expiredAtCode?: Date | null;
 
   @JoinColumn({
     name: 'created_by',
