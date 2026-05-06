@@ -2,8 +2,10 @@ import { CityEntity } from '@/core/cities/domain/entities/city.entity';
 import { ID_USER_DEFAULT } from '@/shared/application/constants/id-user-default';
 import { Data } from '@/shared/domain/decorators/data.decorator';
 import { BaseEntity } from '@/shared/domain/entity/baseEntity';
+import { AddressValidatorFactory } from '../validators/address-validator';
+import { EntityValidationError } from '@/shared/application/errors/validation-error';
 
-type AddressProps = {
+export type AddressProps = {
   cep: string;
   neighborhood: string;
   street: string;
@@ -36,9 +38,6 @@ export interface AddressEntity extends AddressProps {}
 
 @Data()
 export class AddressEntity extends BaseEntity<AddressProps> {
-  protected validate(): void {
-    throw new Error('Method not implemented.');
-  }
   static create(props: CreateAddressProps): AddressEntity {
     return new AddressEntity({
       id: crypto.randomUUID(),
@@ -58,5 +57,15 @@ export class AddressEntity extends BaseEntity<AddressProps> {
       createdBy: props?.createdBy ?? ID_USER_DEFAULT,
       updatedBy: props?.updatedBy ?? ID_USER_DEFAULT,
     });
+  }
+
+  protected validate(): void {
+    const validator = AddressValidatorFactory.create();
+
+    const isValid = validator.validate(this.props);
+    if (!isValid) {
+      console.log('Validation errors:', JSON.stringify(validator.errors, null, 2));
+      throw new EntityValidationError(validator.errors);
+    }
   }
 }

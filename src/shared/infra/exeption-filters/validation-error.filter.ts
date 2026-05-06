@@ -16,10 +16,11 @@ export class EntityValidationErrorFilter implements ExceptionFilter {
     const response = ctx.getResponse<FastifyReply>();
     const request = ctx.getRequest<FastifyRequest>();
 
-    response.status(HttpStatus.UNAUTHORIZED).send({
-      statusCode: HttpStatus.UNAUTHORIZED,
+    response.status(HttpStatus.UNPROCESSABLE_ENTITY).send({
+      statusCode: HttpStatus.UNPROCESSABLE_ENTITY,
       error: 'EntityValidation Error',
       message: exception.message,
+      errors: exception.error,
       path: request.url,
     });
   }

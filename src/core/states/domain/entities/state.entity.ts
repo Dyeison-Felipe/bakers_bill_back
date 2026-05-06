@@ -13,7 +13,7 @@ export class StateEntity {
   uf: string;
 
   constructor(props: StateProps) {
-    this.id = crypto.randomUUID();
+    this.id = props.id ?? crypto.randomUUID();
     this.name = props.name;
     this.uf = props.uf;
   }

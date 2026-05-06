@@ -4,6 +4,7 @@ import { Data } from '@/shared/domain/decorators/data.decorator';
 import { BaseEntity } from '@/shared/domain/entity/baseEntity';
 
 export type UserPermissionProps = {
+  id: string;
   user: UserEntity;
   permission: PermissionEntity;
 };
@@ -18,15 +19,16 @@ export type updatePermissionProps = {
   permission: PermissionEntity;
 };
 
-export interface UserPersmissionEntity extends UserPermissionProps {}
-
-@Data()
-export class UserPersmissionEntity extends BaseEntity<UserPermissionProps> {
-
-  protected validate(): void {
-    throw new Error('Method not implemented.');
+export class UserPersmissionEntity {
+  id: string;
+  user: UserEntity;
+  permission: PermissionEntity;
+  constructor(props: UserPermissionProps) {
+    this.id = props.id;
+    this.permission = props.permission;
+    this.user = props.user;
   }
-  
+
   static create(props: CreatePermissionProps): UserPersmissionEntity {
     return new UserPersmissionEntity({
       id: crypto.randomUUID(),

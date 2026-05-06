@@ -14,7 +14,7 @@ import { UpdateAddressUseCase } from '../../application/usecase/update-address.u
 import { CreateAddressPresenter } from '@/shared/infra/presenter/address/create.presenter';
 import { ConvertPresenter } from '@/shared/infra/presenter/converter/converter.presenter';
 import { UpdateAddressPresenter } from '@/shared/infra/presenter/address/update.presenter';
-import { Permission } from '@/shared/infra/decorators/permission.decorator';
+import { Permission, Public } from '@/shared/infra/decorators/permission.decorator';
 import { PermissionAddress } from '@/core/auth/domain/permissions-definition/address';
 import { FindAddressByCompanyIdUseCase } from '../../application/usecase/find-address-by-id.usecase';
 import { AddressPresenter } from '@/shared/infra/presenter/address/address.preseter';
@@ -28,8 +28,9 @@ export class AddressController {
     private readonly findAddressByCompanyIdUseCase: FindAddressByCompanyIdUseCase,
   ) {}
 
-  @Permission(PermissionAddress.ADDRESS_CREATE)
+  // @Permission(PermissionAddress.ADDRESS_CREATE)
   @Post()
+  @Public()
   @ApiOperation({ summary: 'Criar endereço' })
   @ApiBody({ type: CreateAddressDto })
   @ApiCreatedResponse({ type: CreateAddressPresenter })

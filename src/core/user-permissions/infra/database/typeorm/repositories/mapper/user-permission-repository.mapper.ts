@@ -12,11 +12,6 @@ export class UserPermissionRepositoryMapper {
       id: schema.id,
       user: null as any,
       permission: PermissionRepositoryMappper.toEntity(schema.permission),
-      auditable: {
-        createdAt: schema.createdAt,
-        updatedAt: schema.updatedAt,
-        deletedAt: schema.deletedAt,
-      },
     });
   }
   static toSchema(entity: UserPersmissionEntity): UserPermissionSchema {
@@ -24,9 +19,6 @@ export class UserPermissionRepositoryMapper {
       id: entity.id,
       user: UserRepositoryMapper.toSchema(entity.user),
       permission: PermissionRepositoryMappper.toSchema(entity.permission),
-      createdAt: entity.auditable?.createdAt,
-      updatedAt: entity.auditable?.updatedAt,
-      deletedAt: entity.auditable?.deletedAt,
     });
   }
 }

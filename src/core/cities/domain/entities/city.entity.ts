@@ -14,7 +14,7 @@ export class CityEntity {
   state: StateEntity;
 
   constructor(props: CityProps) {
-    this.id = crypto.randomUUID();
+    this.id = props.id ?? crypto.randomUUID();
     this.name = props.name;
     this.state = props.state;
   }
