@@ -92,7 +92,7 @@ export class UserEntity extends BaseEntity<UserProps> {
   protected validate() {
     const validator = UserValidatorFactory.create();
 
-    const isValid = validator.validate(this);
+    const isValid = validator.validate(this.props);
 
     if (!isValid) {
       throw new EntityValidationError(validator.errors);

@@ -6,7 +6,7 @@ import { Column, Entity, JoinColumn, ManyToOne, OneToOne } from 'typeorm';
 @Entity('company')
 export class CompanySchema extends BaseSchema {
   @Column({
-    name: 'fantasyName',
+    name: 'fantasy_name',
     type: 'varchar',
     length: 255,
     nullable: false,
@@ -14,7 +14,7 @@ export class CompanySchema extends BaseSchema {
   fantasyName: string;
 
   @Column({
-    name: 'socialReazon',
+    name: 'social_reazon',
     type: 'varchar',
     length: 255,
     nullable: false,
@@ -38,7 +38,7 @@ export class CompanySchema extends BaseSchema {
   email: string;
 
   @Column({
-    name: 'phoneNumber',
+    name: 'phone_number',
     type: 'varchar',
     length: 13,
     nullable: false,
