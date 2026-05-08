@@ -11,6 +11,7 @@ import { CompanyProps } from '../entities/company.entity';
 import { AddressRules } from '@/core/address/domain/validators/address-validator';
 import { Type } from 'class-transformer';
 import { ClassValidatorFields } from '@/shared/domain/validators/class-validator-field';
+import { PlanRules } from '@/core/plan/domain/validators/plan-validate';
 
 export class CompanyRules {
   @IsString()
@@ -51,6 +52,11 @@ export class CompanyRules {
   @Type(() => AddressRules)
   @IsNotEmpty()
   address: AddressRules;
+
+  @ValidateNested()
+  @Type(() => PlanRules)
+  @IsNotEmpty()
+  plan: PlanRules;
 
   @IsString()
   @IsNotEmpty()

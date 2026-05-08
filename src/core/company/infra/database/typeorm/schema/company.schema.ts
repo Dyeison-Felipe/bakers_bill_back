@@ -1,4 +1,5 @@
 import { AddressSchema } from '@/core/address/infra/database/typeorm/schema/address.schema';
+import { PlanSchema } from '@/core/plan/infra/database/typeorm/schema/plan.schema';
 import { UserSchema } from '@/core/user/infra/database/typeorm/schema/user.schema';
 import { BaseSchema } from '@/shared/infra/database/typeorm/schema/baseSchema/baseSchema';
 import { Column, Entity, JoinColumn, ManyToOne, OneToOne } from 'typeorm';
@@ -90,4 +91,13 @@ export class CompanySchema extends BaseSchema {
   })
   @OneToOne(() => AddressSchema, (address) => address.company)
   address: AddressSchema;
+
+  @JoinColumn({
+    name: 'plan',
+    referencedColumnName: 'id',
+    foreignKeyConstraintName: 'fk_company_plan',
+  })
+  @ManyToOne(() => PlanSchema, (plan) => plan.company)
+  plan: PlanSchema;
+
 }

@@ -1,5 +1,6 @@
+import { CompanySchema } from '@/core/company/infra/database/typeorm/schema/company.schema';
 import { BaseSchema } from '@/shared/infra/database/typeorm/schema/baseSchema/baseSchema';
-import { Column, Entity } from 'typeorm';
+import { Column, Entity, OneToMany } from 'typeorm';
 
 @Entity('plan')
 export class PlanSchema extends BaseSchema {
@@ -17,5 +18,8 @@ export class PlanSchema extends BaseSchema {
 
   @Column({ name: 'duration', type: 'varchar', nullable: false })
   duration: string;
+
+  @OneToMany(() => CompanySchema, (company) => company.plan)
+  company: CompanySchema[]
 
 }

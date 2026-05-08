@@ -4,6 +4,7 @@ import { BaseEntity } from '@/shared/domain/entity/base-entity';
 import { CompanyValidatorFactory } from '../validators/company-validator';
 import { EntityValidationError } from '@/shared/application/errors/validation-error';
 import { ID_USER_DEFAULT } from '@/shared/application/constants/id-user-default';
+import { Plan } from '@/core/plan/domain/entities/plan.entity';
 
 export type CompanyProps = {
   fantasyName: string;
@@ -14,6 +15,7 @@ export type CompanyProps = {
   logotipo: string;
   active: boolean;
   address: AddressEntity;
+  plan: Plan;
   createdBy: string;
   updatedBy: string;
   deletedBy?: string | null;
@@ -26,6 +28,7 @@ type CreateCompanyProps = {
   email: string;
   phoneNumber: string;
   address: AddressEntity;
+  plan: Plan;
   createdBy: string;
   updatedBy: string;
 };
@@ -35,12 +38,13 @@ type UpdateCompanyProps = {
   socialReazon: string;
   cnpj: string;
   email: string;
+  plan: Plan;
   phoneNumber: string;
   address: AddressEntity;
   updatedBy: string;
 };
 
-export interface CompanyEntity extends CompanyProps {}
+export interface CompanyEntity extends CompanyProps { }
 
 @Data()
 export class CompanyEntity extends BaseEntity<CompanyProps> {
@@ -55,6 +59,7 @@ export class CompanyEntity extends BaseEntity<CompanyProps> {
       logotipo: 'teste',
       phoneNumber: props.phoneNumber,
       address: props.address,
+      plan: props.plan,
       createdBy: props.createdBy ?? ID_USER_DEFAULT,
       updatedBy: props.updatedBy ?? ID_USER_DEFAULT,
     });
@@ -67,6 +72,7 @@ export class CompanyEntity extends BaseEntity<CompanyProps> {
     this.email = props.email;
     this.phoneNumber = props.phoneNumber;
     this.updatedBy = props.updatedBy;
+    this.plan = props.plan;
     this.updateTimestamp();
   }
 

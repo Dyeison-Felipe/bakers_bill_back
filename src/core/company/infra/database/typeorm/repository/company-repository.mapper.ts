@@ -3,6 +3,7 @@ import { CompanySchema } from '../schema/company.schema';
 import { AddressRepositoryMapper } from '@/core/address/infra/database/typeorm/repository/mapper/address-repository.mapper';
 import { UserSchema } from '@/core/user/infra/database/typeorm/schema/user.schema';
 import { Injectable } from '@nestjs/common';
+import { PlanMapper } from '@/core/plan/infra/database/typeorm/repositories/mapper/plan-mapper';
 
 @Injectable()
 export class CompanyRepositoryMapper {
@@ -17,6 +18,7 @@ export class CompanyRepositoryMapper {
       email: schema.email,
       logotipo: schema.logotipo,
       address: AddressRepositoryMapper.toEntity(schema.address),
+      plan: PlanMapper.toEntity(schema.plan),
       auditable: {
         createdAt: schema.createdAt,
         updatedAt: schema.updatedAt,
@@ -49,6 +51,7 @@ export class CompanyRepositoryMapper {
         ? UserSchema.from({ id: entity.deletedBy })
         : null,
       address: AddressRepositoryMapper.toSchema(entity.address),
+      plan: PlanMapper.toSchema(entity.plan)
     });
 
     return schema;
