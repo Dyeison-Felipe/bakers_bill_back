@@ -24,8 +24,8 @@ export class CompanyRepositoryMapper {
         updatedAt: schema.updatedAt,
         deletedAt: schema.deletedAt,
       },
-      createdBy: schema.createdBy.id,
-      updatedBy: schema.updatedBy.id,
+      createdBy: schema.createdBy?.id,
+      updatedBy: schema.updatedBy?.id,
       deletedBy: schema.deletedBy?.id,
     });
 

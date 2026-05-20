@@ -10,9 +10,9 @@ export class RoleRepositoryMapper {
     const role = new Role({
       id: schema.id,
       name: schema.name,
-      company: CompanyRepositoryMapper.toEntity(schema.company),
-      createdBy: schema.createdBy.id,
-      updatedBy: schema.updatedBy.id,
+      company:CompanyRepositoryMapper.toEntity(schema.company),
+      createdBy: schema.createdBy?.id,
+      updatedBy: schema.updatedBy?.id,
       deletedBy: schema.deletedBy?.id,
       auditable: {
         createdAt: schema.createdAt,
@@ -28,7 +28,7 @@ export class RoleRepositoryMapper {
     const schema = RoleSchema.from({
       id: entity.id,
       name: entity.name,
-      company: CompanyRepositoryMapper.toSchema(entity.company),
+      company: CompanyRepositoryMapper.toSchema(entity.company!),
       createdAt: entity.auditable?.createdAt,
       updatedAt: entity.auditable?.updatedAt,
       deletedAt: entity.auditable?.deletedAt,

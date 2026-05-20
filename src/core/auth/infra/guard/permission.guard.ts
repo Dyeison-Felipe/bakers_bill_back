@@ -64,6 +64,10 @@ export class PermissionGuard implements CanActivate {
       request.user = user;
       this.loggedUserService.setLoggedUser(user);
 
+      if(user.role.name === 'Admin') {
+        return true;
+      }
+
       // 4. Verifica permissões com CASL
       const policies = this.reflector.getAllAndOverride<PermissionRef[]>(
         PERMISSIONS_KEY,

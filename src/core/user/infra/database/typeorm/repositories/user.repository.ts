@@ -1,7 +1,7 @@
 import { UserRepository } from '@/core/user/domain/repositories/user.repository';
 import { InjectRepository } from '@nestjs/typeorm';
 import { UserSchema } from '../schema/user.schema';
-import { Repository } from 'typeorm';
+import { FindOptionsRelations, Repository } from 'typeorm';
 import { UserRepositoryMapper } from './mapper/user-mapper';
 import { UserEntity } from '@/core/user/domain/entities/user.entity';
 
@@ -54,21 +54,7 @@ export class UserRepositoryImpl implements UserRepository {
   async findByEmail(email: string): Promise<UserEntity | null> {
     const userSchema = await this.userRepository.findOne({
       where: { email },
-      relations: [
-        'userPermissions',
-        'userPermissions.permission',
-        'role',
-        'role.company',
-        'role.company.address',
-        'role.company.plan',
-        'role.createdBy',
-        'role.updatedBy',
-        'company',
-        'company.plan',
-        'company.address',
-        'company.createdBy',
-        'company.updatedBy',
-      ],
+      relations: this.getRelations(),
     });
 
     if (!userSchema) return null;
@@ -108,5 +94,30 @@ export class UserRepositoryImpl implements UserRepository {
 
   async delete(id: string): Promise<void> {
     await this.userRepository.softDelete(id);
+  }
+
+  private getRelations(): FindOptionsRelations<UserSchema> {
+    return {
+      role: {
+        company: {
+          address: {
+            city: {
+              state: true,
+            },
+          },
+        },
+      },
+      company: {
+        address: {
+          city: {
+            state: true,
+          },
+        },
+        plan: true,
+      },
+      userPermissions: {
+        permission: true,
+      },
+    };
   }
 }
