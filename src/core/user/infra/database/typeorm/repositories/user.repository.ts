@@ -107,8 +107,6 @@ export class UserRepositoryImpl implements UserRepository {
           },
           plan: true,
         },
-        createdBy: true, // carrega o UserSchema completo
-        updatedBy: true,
       },
       company: {
         address: {

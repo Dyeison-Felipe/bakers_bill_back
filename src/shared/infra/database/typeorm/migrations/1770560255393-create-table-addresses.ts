@@ -1,3 +1,4 @@
+import { ID_USER_DEFAULT } from '@/shared/application/constants/id-user-default';
 import {
   MigrationInterface,
   QueryRunner,
@@ -81,13 +82,13 @@ export class CreateTableAddresses1770560255393 implements MigrationInterface {
           },
           {
             name: 'created_by',
-            type: 'varchar',
-            isNullable: true,
+            type: 'uuid',
+            isNullable: false,
           },
           {
             name: 'updated_by',
             type: 'uuid',
-            isNullable: true,
+            isNullable: false,
           },
           {
             name: 'deleted_by',
@@ -114,7 +115,7 @@ export class CreateTableAddresses1770560255393 implements MigrationInterface {
       }),
     );
     await queryRunner.query(`
-      INSERT INTO addresses (id, cep, neighborhood, street, number, city, created_by, created_at, updated_at)
+      INSERT INTO addresses (id, cep, neighborhood, street, number, city, created_at, updated_at, created_by, updated_by)
       VALUES (
         'c2eebc99-9c0b-4ef8-bb6d-6bb9bd380a33',
         '85070620',
@@ -122,9 +123,10 @@ export class CreateTableAddresses1770560255393 implements MigrationInterface {
         'Rua Nova Londrina',
         '247',
         (SELECT id FROM cities WHERE name = 'Guarapuava' LIMIT 1),
-        'a0eebc99-9c0b-4ef8-bb6d-6bb9bd380a11',
         now(),
-        now()
+        now(),
+        '${ID_USER_DEFAULT}',
+        '${ID_USER_DEFAULT}' 
       )
     `);
   }

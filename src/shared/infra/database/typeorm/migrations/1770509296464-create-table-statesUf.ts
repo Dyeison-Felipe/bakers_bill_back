@@ -42,21 +42,6 @@ export class CreateTableStatesUf1770509296464 implements MigrationInterface {
             type: "timestamp",
             isNullable: true,
           },
-          {
-            name: "created_by",
-            type: "uuid",
-            isNullable: true,
-          },
-          {
-            name: "updated_by",
-            type: "uuid",
-            isNullable: true,
-          },
-          {
-            name: "deleted_by",
-            type: "uuid",
-            isNullable: true,
-          },
         ],
         comment: "Unidades Federativas",
       })

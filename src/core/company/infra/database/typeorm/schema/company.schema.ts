@@ -69,44 +69,18 @@ export class CompanySchema extends BaseSchema {
   })
   active: boolean;
 
-  @JoinColumn({
-    name: 'created_by',
-    referencedColumnName: 'id',
-    foreignKeyConstraintName: 'fk_company_created_by',
-  })
-  @ManyToOne(() => UserSchema, { nullable: false })
-  createdBy: UserSchema;
+  @Column({ name: 'created_by', type: 'uuid', nullable: false })
+  createdBy: string;
 
-  @Column({ name: 'created_by', type: 'uuid', insert: false, update: false })
-  createdById: string;
-
-  @JoinColumn({
-    name: 'updated_by',
-    referencedColumnName: 'id',
-    foreignKeyConstraintName: 'fk_company_updated_by',
-  })
-  @ManyToOne(() => UserSchema, { nullable: false })
-  updatedBy: UserSchema;
-
-  @Column({ name: 'updated_by', type: 'uuid', insert: false, update: false })
-  updatedById: string;
-
-  @JoinColumn({
-    name: 'deleted_by',
-    referencedColumnName: 'id',
-    foreignKeyConstraintName: 'fk_company_deleted_by',
-  })
-  @ManyToOne(() => UserSchema, { nullable: true })
-  deletedBy: UserSchema | null;
+  @Column({ name: 'updated_by', type: 'uuid', nullable: false })
+  updatedBy: string;
 
   @Column({
     name: 'deleted_by',
     type: 'uuid',
     nullable: true,
-    insert: false,
-    update: false,
   })
-  deletedById: string | null;
+  deletedBy: string | null;
 
   @JoinColumn({
     name: 'address',

@@ -1,6 +1,7 @@
+import { ID_USER_DEFAULT } from '@/shared/application/constants/id-user-default';
 import { MigrationInterface, QueryRunner, Table } from 'typeorm';
 
-export class CreateTablePlan1778247383889 implements MigrationInterface {
+export class CreateTableCompany1778247383889 implements MigrationInterface {
   public async up(queryRunner: QueryRunner): Promise<void> {
     await queryRunner.createTable(
       new Table({
@@ -84,12 +85,12 @@ export class CreateTablePlan1778247383889 implements MigrationInterface {
           {
             name: 'created_by',
             type: 'uuid',
-            isNullable: true,
+            isNullable: false,
           },
           {
             name: 'updated_by',
             type: 'uuid',
-            isNullable: true,
+            isNullable: false,
           },
           {
             name: 'deleted_by',
@@ -115,7 +116,7 @@ export class CreateTablePlan1778247383889 implements MigrationInterface {
     );
 
     await queryRunner.query(`
-      INSERT INTO companies (id, fantasy_name, social_reazon, cnpj, email, phone_number, active, plan, address, created_by, updated_by, created_at, updated_at)
+      INSERT INTO companies (id, fantasy_name, social_reazon, cnpj, email, phone_number, active, plan, address, created_at, updated_at, created_by, updated_by)
       VALUES (
         'd3eebc99-9c0b-4ef8-bb6d-6bb9bd380a44',
         'CodeForge',
@@ -126,10 +127,10 @@ export class CreateTablePlan1778247383889 implements MigrationInterface {
         true,
         'b1eebc99-9c0b-4ef8-bb6d-6bb9bd380a22',
         'c2eebc99-9c0b-4ef8-bb6d-6bb9bd380a33',
-        'a0eebc99-9c0b-4ef8-bb6d-6bb9bd380a11',
-        'a0eebc99-9c0b-4ef8-bb6d-6bb9bd380a11',
         now(),
-        now()
+        now(),
+        '${ID_USER_DEFAULT}',
+        '${ID_USER_DEFAULT}'
       )
     `);
   }

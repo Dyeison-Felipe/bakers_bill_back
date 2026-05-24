@@ -1,3 +1,4 @@
+import { ID_USER_DEFAULT } from '@/shared/application/constants/id-user-default';
 import { MigrationInterface, QueryRunner, Table } from 'typeorm';
 
 export class CreateTableUsers1779064419090 implements MigrationInterface {
@@ -76,12 +77,12 @@ export class CreateTableUsers1779064419090 implements MigrationInterface {
           {
             name: 'created_by',
             type: 'uuid',
-            isNullable: true,
+            isNullable: false,
           },
           {
             name: 'updated_by',
             type: 'uuid',
-            isNullable: true,
+            isNullable: false,
           },
           {
             name: 'deleted_by',
@@ -108,12 +109,10 @@ export class CreateTableUsers1779064419090 implements MigrationInterface {
       }),
     );
 
-    const systemUserId = 'a0eebc99-9c0b-4ef8-bb6d-6bb9bd380a11';
-
     await queryRunner.query(`
-      INSERT INTO users (id, username, email, password, active, role, company, created_at, updated_at)
+      INSERT INTO users (id, username, email, password, active, role, company, created_at, updated_at, created_by, updated_by)
       VALUES (
-        '${systemUserId}',
+        '${ID_USER_DEFAULT}',
         'system',
         'system@system.com',
         'system',
@@ -121,7 +120,9 @@ export class CreateTableUsers1779064419090 implements MigrationInterface {
         'e4eebc99-9c0b-4ef8-bb6d-6bb9bd380a55',
         'd3eebc99-9c0b-4ef8-bb6d-6bb9bd380a44',
         now(),
-        now()
+        now(),
+        '${ID_USER_DEFAULT}',
+        '${ID_USER_DEFAULT}'
       )
     `);
   }

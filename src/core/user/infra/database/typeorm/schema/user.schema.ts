@@ -30,29 +30,18 @@ export class UserSchema extends BaseSchema {
   @Column({ name: 'expired_at_code', type: 'timestamp', nullable: true })
   expiredAtCode?: Date | null;
 
-  @JoinColumn({
-    name: 'created_by',
-    referencedColumnName: 'id',
-    foreignKeyConstraintName: 'fk_user_created_by',
-  })
-  @ManyToOne(() => UserSchema, { nullable: true })
-  createdBy: UserSchema | null;
+  @Column({ name: 'created_by', type: 'uuid', nullable: false, })
+  createdBy: string;
 
-  @JoinColumn({
-    name: 'updated_by',
-    referencedColumnName: 'id',
-    foreignKeyConstraintName: 'fk_user_updated_by',
-  })
-  @ManyToOne(() => UserSchema, { nullable: true })
-  updatedBy: UserSchema | null;
+  @Column({ name: 'updated_by', type: 'uuid', nullable: false, })
+  updatedBy: string;
 
-  @JoinColumn({
+  @Column({
     name: 'deleted_by',
-    referencedColumnName: 'id',
-    foreignKeyConstraintName: 'fk_user_deleted_by',
+    type: 'uuid',
+    nullable: true,
   })
-  @ManyToOne(() => UserSchema, { nullable: true })
-  deletedBy: UserSchema | null;
+  deletedBy: string | null;
 
   @JoinColumn({
     name: 'role',
@@ -62,7 +51,7 @@ export class UserSchema extends BaseSchema {
   @ManyToOne(() => RoleSchema, (role) => role.user)
   role: RoleSchema;
 
-    @JoinColumn({
+  @JoinColumn({
     name: 'company',
     referencedColumnName: 'id',
     foreignKeyConstraintName: 'fk_user_company',
@@ -72,5 +61,4 @@ export class UserSchema extends BaseSchema {
 
   @OneToMany(() => UserPermissionSchema, (up) => up.user)
   userPermissions?: UserPermissionSchema[];
-
 }

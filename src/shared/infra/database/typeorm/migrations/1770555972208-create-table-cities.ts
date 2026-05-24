@@ -38,21 +38,6 @@ export class CreateTableCities1770555972208 implements MigrationInterface {
             isNullable: true,
           },
           {
-            name: 'created_by',
-            type: 'uuid',
-            isNullable: true,
-          },
-          {
-            name: 'updated_by',
-            type: 'uuid',
-            isNullable: true,
-          },
-          {
-            name: 'deleted_by',
-            type: 'uuid',
-            isNullable: true,
-          },
-          {
             name: "state",
             type: "uuid",
             isNullable: false,

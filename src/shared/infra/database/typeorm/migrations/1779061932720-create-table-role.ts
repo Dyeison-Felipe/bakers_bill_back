@@ -1,3 +1,4 @@
+import { ID_USER_DEFAULT } from '@/shared/application/constants/id-user-default';
 import { MigrationInterface, QueryRunner, Table } from 'typeorm';
 
 export class CreateTableRole1779061932720 implements MigrationInterface {
@@ -43,12 +44,12 @@ export class CreateTableRole1779061932720 implements MigrationInterface {
           {
             name: 'created_by',
             type: 'uuid',
-            isNullable: true,
+            isNullable: false,
           },
           {
             name: 'updated_by',
             type: 'uuid',
-            isNullable: true,
+            isNullable: false,
           },
           {
             name: 'deleted_by',
@@ -67,15 +68,15 @@ export class CreateTableRole1779061932720 implements MigrationInterface {
       }),
     );
     await queryRunner.query(`
-      INSERT INTO roles (id, name, company, created_by, updated_by, created_at, updated_at)
+      INSERT INTO roles (id, name, company, created_at, updated_at, created_by, updated_by)
       VALUES (
         'e4eebc99-9c0b-4ef8-bb6d-6bb9bd380a55',
         'Super Admin',
         'd3eebc99-9c0b-4ef8-bb6d-6bb9bd380a44',
-        'a0eebc99-9c0b-4ef8-bb6d-6bb9bd380a11',
-        'a0eebc99-9c0b-4ef8-bb6d-6bb9bd380a11',
         now(),
-        now()
+        now(),
+        '${ID_USER_DEFAULT}',
+        '${ID_USER_DEFAULT}'
       )
     `);
   }
