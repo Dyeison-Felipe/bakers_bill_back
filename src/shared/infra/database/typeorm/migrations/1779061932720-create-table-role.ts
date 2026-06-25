@@ -5,7 +5,7 @@ export class CreateTableRole1779061932720 implements MigrationInterface {
   public async up(queryRunner: QueryRunner): Promise<void> {
     await queryRunner.createTable(
       new Table({
-        name: 'roles',
+        name: 'role',
         columns: [
           {
             name: 'id',
@@ -61,14 +61,14 @@ export class CreateTableRole1779061932720 implements MigrationInterface {
           {
             name: 'fk_role_company',
             columnNames: ['company'],
-            referencedTableName: 'companies',
+            referencedTableName: 'company',
             referencedColumnNames: ['id'],
           },
         ],
       }),
     );
     await queryRunner.query(`
-      INSERT INTO roles (id, name, company, created_at, updated_at, created_by, updated_by)
+      INSERT INTO role (id, name, company, created_at, updated_at, created_by, updated_by)
       VALUES (
         'e4eebc99-9c0b-4ef8-bb6d-6bb9bd380a55',
         'Super Admin',

@@ -6,7 +6,7 @@ export class CreateTablePermissions1771381250707 implements MigrationInterface {
 
     await queryRunner.createTable(
       new Table({
-        name: 'permissions',
+        name: 'permission',
         columns: [
           {
             name: 'id',
@@ -24,6 +24,12 @@ export class CreateTablePermissions1771381250707 implements MigrationInterface {
           },
           {
             name: 'subject',
+            type: 'varchar',
+            length: '255',
+            isNullable: false,
+          },
+          {
+            name: 'description',
             type: 'varchar',
             length: '255',
             isNullable: false,

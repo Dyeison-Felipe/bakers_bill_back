@@ -1,7 +1,7 @@
 import { BaseRepository } from '@/shared/domain/repository/base-repository';
-import { PermissionEntity } from '../entity/permission.entity';
+import { Permission } from '../entity/permission.entity';
 
-export interface PermissionRepository extends BaseRepository<PermissionEntity> {
-  findAll(): Promise<PermissionEntity[] | null>;
-  findPermissionsById(id: string[]): Promise<PermissionEntity[]>;
+export interface PermissionRepository extends BaseRepository<Permission> {
+  findAll(): Promise<Permission[] | null>;
+  findPermissionsById(id: string[]): Promise<Permission[]>;
 }

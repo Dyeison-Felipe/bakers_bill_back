@@ -5,7 +5,7 @@ export class CreateTableCompany1778247383889 implements MigrationInterface {
   public async up(queryRunner: QueryRunner): Promise<void> {
     await queryRunner.createTable(
       new Table({
-        name: 'companies',
+        name: 'company',
         columns: [
           {
             name: 'id',
@@ -108,7 +108,7 @@ export class CreateTableCompany1778247383889 implements MigrationInterface {
           {
             name: 'fk_company_address',
             columnNames: ['address'],
-            referencedTableName: 'addresses',
+            referencedTableName: 'address',
             referencedColumnNames: ['id'],
           },
         ],
@@ -116,7 +116,7 @@ export class CreateTableCompany1778247383889 implements MigrationInterface {
     );
 
     await queryRunner.query(`
-      INSERT INTO companies (id, fantasy_name, social_reazon, cnpj, email, phone_number, active, plan, address, created_at, updated_at, created_by, updated_by)
+      INSERT INTO company (id, fantasy_name, social_reazon, cnpj, email, phone_number, active, plan, address, created_at, updated_at, created_by, updated_by)
       VALUES (
         'd3eebc99-9c0b-4ef8-bb6d-6bb9bd380a44',
         'CodeForge',

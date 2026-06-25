@@ -1,4 +1,4 @@
-import { PermissionEntity } from '@/core/permissions/domain/entity/permission.entity';
+import { Permission } from '@/core/permissions/domain/entity/permission.entity';
 import { UserEntity } from '@/core/user/domain/entities/user.entity';
 import { Data } from '@/shared/domain/decorators/data.decorator';
 import { BaseEntity } from '@/shared/domain/entity/base-entity';
@@ -6,23 +6,23 @@ import { BaseEntity } from '@/shared/domain/entity/base-entity';
 export type UserPermissionProps = {
   id: string;
   user: UserEntity;
-  permission: PermissionEntity;
+  permission: Permission;
 };
 
 export type CreatePermissionProps = {
   user: UserEntity;
-  permission: PermissionEntity;
+  permission: Permission;
 };
 
 export type updatePermissionProps = {
   user: UserEntity;
-  permission: PermissionEntity;
+  permission: Permission;
 };
 
 export class UserPersmissionEntity {
   id: string;
   user: UserEntity;
-  permission: PermissionEntity;
+  permission: Permission;
   constructor(props: UserPermissionProps) {
     this.id = props.id;
     this.permission = props.permission;

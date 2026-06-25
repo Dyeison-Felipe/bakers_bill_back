@@ -5,7 +5,7 @@ export class CreateTableUsers1779064419090 implements MigrationInterface {
   public async up(queryRunner: QueryRunner): Promise<void> {
     await queryRunner.createTable(
       new Table({
-        name: 'users',
+        name: 'user',
         columns: [
           {
             name: 'id',
@@ -94,14 +94,14 @@ export class CreateTableUsers1779064419090 implements MigrationInterface {
           {
             name: 'fk_user_role',
             columnNames: ['role'],
-            referencedTableName: 'roles',
+            referencedTableName: 'role',
             referencedColumnNames: ['id'],
             onDelete: 'RESTRICT',
           },
           {
             name: 'fk_user_company',
             columnNames: ['company'],
-            referencedTableName: 'companies',
+            referencedTableName: 'company',
             referencedColumnNames: ['id'],
             onDelete: 'RESTRICT',
           },
@@ -110,7 +110,7 @@ export class CreateTableUsers1779064419090 implements MigrationInterface {
     );
 
     await queryRunner.query(`
-      INSERT INTO users (id, username, email, password, active, role, company, created_at, updated_at, created_by, updated_by)
+      INSERT INTO "user" (id, username, email, password, active, role, company, created_at, updated_at, created_by, updated_by)
       VALUES (
         '${ID_USER_DEFAULT}',
         'system',

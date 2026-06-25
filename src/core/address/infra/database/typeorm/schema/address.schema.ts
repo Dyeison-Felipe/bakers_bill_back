@@ -13,7 +13,7 @@ import {
   UpdateDateColumn,
 } from 'typeorm';
 
-@Entity('addresses')
+@Entity('address')
 export class AddressSchema extends BaseSchema {
   @Column({ name: 'cep', type: 'varchar', nullable: true, length: 8 })
   cep: string | null;

@@ -3,7 +3,7 @@ import { UserSchema } from '@/core/user/infra/database/typeorm/schema/user.schem
 import { BaseSchema } from '@/shared/infra/database/typeorm/schema/baseSchema/baseSchema';
 import { Column, Entity, JoinColumn, ManyToOne, OneToMany } from 'typeorm';
 
-@Entity('roles')
+@Entity('role')
 export class RoleSchema extends BaseSchema {
   @Column({ name: 'name', type: 'varchar', length: 255, nullable: false })
   name: string;

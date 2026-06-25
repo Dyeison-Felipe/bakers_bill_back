@@ -12,7 +12,7 @@ import {
   OneToOne,
 } from 'typeorm';
 
-@Entity('companies')
+@Entity('company')
 export class CompanySchema extends BaseSchema {
   @Column({
     name: 'fantasy_name',

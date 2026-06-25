@@ -13,7 +13,7 @@ export class CreateTableAddresses1770560255393 implements MigrationInterface {
 
     await queryRunner.createTable(
       new Table({
-        name: 'addresses',
+        name: 'address',
         columns: [
           {
             name: 'id',
@@ -103,9 +103,9 @@ export class CreateTableAddresses1770560255393 implements MigrationInterface {
         ],
         foreignKeys: [
           {
-            name: 'fk_addresses_city_id',
+            name: 'fk_address_city_id',
             columnNames: ['city'],
-            referencedTableName: 'cities',
+            referencedTableName: 'city',
             referencedColumnNames: ['id'],
             onDelete: 'RESTRICT',
             onUpdate: 'CASCADE',
@@ -115,14 +115,14 @@ export class CreateTableAddresses1770560255393 implements MigrationInterface {
       }),
     );
     await queryRunner.query(`
-      INSERT INTO addresses (id, cep, neighborhood, street, number, city, created_at, updated_at, created_by, updated_by)
+      INSERT INTO address (id, cep, neighborhood, street, number, city, created_at, updated_at, created_by, updated_by)
       VALUES (
         'c2eebc99-9c0b-4ef8-bb6d-6bb9bd380a33',
         '85070620',
         'Santana',
         'Rua Nova Londrina',
         '247',
-        (SELECT id FROM cities WHERE name = 'Guarapuava' LIMIT 1),
+        (SELECT id FROM city WHERE name = 'Guarapuava' LIMIT 1),
         now(),
         now(),
         '${ID_USER_DEFAULT}',

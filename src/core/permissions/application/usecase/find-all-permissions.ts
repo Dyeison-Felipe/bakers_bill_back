@@ -24,6 +24,7 @@ export class FindAllPermissionsUseCase implements UseCase<Input, Output> {
         id: permission.id,
         action: permission.action,
         subject: permission.subject,
+        description: permission.description,
       };
     });
 

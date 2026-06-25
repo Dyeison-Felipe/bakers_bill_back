@@ -6,7 +6,7 @@ export class CreateTableStatesUf1770509296464 implements MigrationInterface {
 
     await queryRunner.createTable(
       new Table({
-        name: "states",
+        name: "state",
         columns: [
           {
             name: "id",
@@ -48,7 +48,7 @@ export class CreateTableStatesUf1770509296464 implements MigrationInterface {
     );
 
     // ✅ insert com UUID fixo
-    await queryRunner.manager.insert("states", [
+    await queryRunner.manager.insert("state", [
       { id: "90c5e9f3-df4c-4a22-a3ab-29c42fd3b4d2", name: "Acre", uf: "AC" },
       { id: "f53dcfe1-c291-4e57-855e-385a2e6c790b", name: "Alagoas", uf: "AL" },
       { id: "721f0157-0811-45db-a215-64c3ec5dc3ad", name: "Amazonas", uf: "AM" },

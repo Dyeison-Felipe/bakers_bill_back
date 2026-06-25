@@ -1,7 +1,7 @@
 services:
-  pan_metrics:
+  postgres:
     image: postgres:16
-    container_name: pan_metrics
+    container_name: database_bakers_bill
     restart: always
     environment:
       POSTGRES_USER: ${DB_USER}
@@ -10,10 +10,10 @@ services:
       TZ: ${TZ}
       PGTZ: ${PGTZ}
     ports:
-      - "5433:5432"
+      - "5431:5432"
     volumes:
-      - db_data_pan_metrics:/var/lib/postgresql/data
+      - db_data_bakers_bill:/var/lib/postgresql/data
       
   
 volumes:
-  db_data_pan_metrics:
+  db_data_bakers_bill:

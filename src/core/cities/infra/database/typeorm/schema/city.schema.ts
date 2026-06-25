@@ -9,7 +9,7 @@ import {
   OneToMany,
 } from 'typeorm';
 
-@Entity('cities')
+@Entity('city')
 export class CitySchema extends BaseSchema {
 
   @Column({ name: 'name', type: 'varchar', length: 255, nullable: false })

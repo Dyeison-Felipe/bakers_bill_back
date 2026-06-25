@@ -2,7 +2,7 @@ import { CitySchema } from '@/core/cities/infra/database/typeorm/schema/city.sch
 import { BaseSchema } from '@/shared/infra/database/typeorm/schema/baseSchema/baseSchema';
 import { Column, Entity, OneToMany} from 'typeorm';
 
-@Entity('states')
+@Entity('state')
 export class StateSchema extends BaseSchema {
   @Column({ name: 'name', type: 'varchar', length: 255, nullable: false })
   name: string;

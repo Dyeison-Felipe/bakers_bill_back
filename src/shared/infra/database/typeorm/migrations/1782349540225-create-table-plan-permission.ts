@@ -1,15 +1,10 @@
-import {
-  MigrationInterface,
-  QueryRunner,
-  Table,
-  TableForeignKey,
-} from 'typeorm';
+import { MigrationInterface, QueryRunner, Table } from 'typeorm';
 
-export class CreateTableUserPermissions1779064998943 implements MigrationInterface {
+export class CreateTablePlanPermission1782349540225 implements MigrationInterface {
   public async up(queryRunner: QueryRunner): Promise<void> {
     await queryRunner.createTable(
       new Table({
-        name: 'user_permission',
+        name: 'plan_permission',
         columns: [
           {
             name: 'id',
@@ -20,7 +15,7 @@ export class CreateTableUserPermissions1779064998943 implements MigrationInterfa
             default: 'public.uuid_generate_v4()',
           },
           {
-            name: 'user',
+            name: 'plan',
             type: 'uuid',
             isNullable: false,
           },
@@ -47,20 +42,18 @@ export class CreateTableUserPermissions1779064998943 implements MigrationInterfa
         ],
         foreignKeys: [
           {
-            name: 'fk_user_permission_user',
-            columnNames: ['user'],
-            referencedTableName: 'user',
+            name: 'fk_plan_permission_plan',
+            columnNames: ['plan'],
+            referencedTableName: 'plan',
             referencedColumnNames: ['id'],
-            onDelete: 'CASCADE ',
-            onUpdate: 'CASCADE',
+            onDelete: 'RESTRICT',
           },
           {
-            name: 'fk_user_permission_permission',
+            name: 'fk_plan_permission_permission',
             columnNames: ['permission'],
             referencedTableName: 'permission',
             referencedColumnNames: ['id'],
-            onDelete: 'CASCADE',
-            onUpdate: 'CASCADE',
+            onDelete: 'RESTRICT',
           },
         ],
       }),

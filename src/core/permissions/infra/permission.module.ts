@@ -1,7 +1,7 @@
 import { Module } from '@nestjs/common';
 import { PROVIDERS } from '@/shared/application/constants/providers';
 import { PermissionRepositoryImpl } from './database/typeorm/repositories/permission.repository';
-import { PermissionRepositoryMappper } from './database/typeorm/repositories/mapper/permission.mapper';
+import { PermissionMappper } from './database/typeorm/repositories/mapper/permission.mapper';
 import { TypeOrmModule } from '@nestjs/typeorm';
 import { PermissionSchema } from './database/typeorm/schema/permission.schema';
 import { FindAllPermissionsUseCase } from '../application/usecase/find-all-permissions';

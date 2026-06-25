@@ -10,7 +10,7 @@ import { UseCase } from '@/shared/application/usecase/usecase';
 import { LoggedUserService } from '@/shared/application/logged-user/logged-user.service';
 import { UserPermissionRepository } from '@/core/user-permissions/domain/repositories/user-permission.repository';
 import { PermissionRepository } from '@/core/permissions/domain/repositories/permission.repository';
-import { PermissionEntity } from '@/core/permissions/domain/entity/permission.entity';
+import { Permission } from '@/core/permissions/domain/entity/permission.entity';
 import { UserPersmissionEntity } from '@/core/user-permissions/domain/entities/user-permission.entity';
 import { NotFoundError } from '@/shared/application/errors/not-found-error';
 import { BadRequestError } from '@/shared/application/errors/bad-request-error';
@@ -103,7 +103,7 @@ export class UpdateUserUseCase implements UseCase<Input, Output> {
   }
 
   async updateUserPermission(
-    permissions: PermissionEntity[],
+    permissions: Permission[],
     user: UserEntity,
   ): Promise<UserPersmissionEntity[]> {
     try {

@@ -3,7 +3,7 @@ import { UserSchema } from '@/core/user/infra/database/typeorm/schema/user.schem
 import { BaseSchema } from '@/shared/infra/database/typeorm/schema/baseSchema/baseSchema';
 import { Entity, JoinColumn, ManyToOne } from 'typeorm';
 
-@Entity('userpermissions')
+@Entity('user_permission')
 export class UserPermissionSchema extends BaseSchema {
   @ManyToOne(() => UserSchema, (user) => user.userPermissions, {
     onDelete: 'CASCADE',

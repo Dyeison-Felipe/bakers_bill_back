@@ -5,7 +5,7 @@ import { UserPermissionSchema } from '@/core/user-permissions/infra/database/typ
 import { BaseSchema } from '@/shared/infra/database/typeorm/schema/baseSchema/baseSchema';
 import { Column, Entity, JoinColumn, ManyToOne, OneToMany } from 'typeorm';
 
-@Entity('users')
+@Entity('user')
 export class UserSchema extends BaseSchema {
   @Column()
   username: string;
