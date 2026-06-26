@@ -1,9 +1,9 @@
 import { Inject, Injectable } from '@nestjs/common';
 import { AddressSchema } from '../../schema/address.schema';
 import { PROVIDERS } from '@/shared/application/constants/providers';
-import { CityMapper } from '@/core/cities/infra/database/typeorm/repositories/mapper/city-mapper';
 import { Address } from '@/core/address/domain/entities/address.entity';
 import { UserSchema } from '@/core/user/infra/database/typeorm/schema/user.schema';
+import { CityMapper } from '@/core/city/infra/database/typeorm/repositories/mapper/city-mapper';
 
 @Injectable()
 export class AddressRepositoryMapper {

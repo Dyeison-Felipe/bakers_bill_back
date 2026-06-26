@@ -3,21 +3,19 @@ import { UserEntity } from '@/core/user/domain/entities/user.entity';
 import type { UserRepository } from '@/core/user/domain/repositories/user.repository';
 import { ID_USER_DEFAULT } from '@/shared/application/constants/id-user-default';
 import { PROVIDERS } from '@/shared/application/constants/providers';
-import { ConflictError } from '@/shared/application/errors/conflict-error';
 import type { HashService } from '@/shared/application/hash/hash.service';
-import { CreateUserOutput } from '@/shared/application/output/users/create-user.output';
 import { UseCase } from '@/shared/application/usecase/usecase';
 import { LoggedUserService } from '@/shared/application/logged-user/logged-user.service';
-import { UserPermissionRepository } from '@/core/user-permissions/domain/repositories/user-permission.repository';
-import { PermissionRepository } from '@/core/permissions/domain/repositories/permission.repository';
-import { Permission } from '@/core/permissions/domain/entity/permission.entity';
-import { UserPersmissionEntity } from '@/core/user-permissions/domain/entities/user-permission.entity';
 import { NotFoundError } from '@/shared/application/errors/not-found-error';
 import { BadRequestError } from '@/shared/application/errors/bad-request-error';
 import { Transactional } from '@/shared/infra/database/typeorm/decorators/transactional.decorator';
 import { UpdateUserInput } from '@/shared/application/input/users/update-user.input';
 import { UpdateUserOutput } from '@/shared/application/output/users/update-user.output';
 import { RoleRepository } from '@/core/role/domain/repositories/role.repository';
+import { UserPermissionRepository } from '@/core/user-permission/domain/repositories/user-permission.repository';
+import { PermissionRepository } from '@/core/permission/domain/repositories/permission.repository';
+import { UserPersmissionEntity } from '@/core/user-permission/domain/entities/user-permission.entity';
+import { Permission } from '@/core/permission/domain/entity/permission.entity';
 
 type Input = UpdateUserInput;
 

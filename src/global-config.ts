@@ -33,7 +33,7 @@ export async function globalConfig(
   //  CORS
   const origins = envConfig.getAllowedOrigins();
   app.enableCors({
-    origin: origins,
+    origin: envConfig.getAllowedOrigins().split(','),
     methods: 'GET,PUT,POST,DELETE',
     allowedHeaders: ['Content-Type', 'Authorization'],
     credentials: true,

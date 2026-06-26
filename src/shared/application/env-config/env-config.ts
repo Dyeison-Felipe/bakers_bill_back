@@ -14,7 +14,7 @@ export interface EnvConfig {
   getDbName(): string
   getPort(): number;
   getNodeEnv(): string;
-  getAllowedOrigins(): string[]
+  getAllowedOrigins(): string
   getSalts(): number;
   getSchema(): string;
 }

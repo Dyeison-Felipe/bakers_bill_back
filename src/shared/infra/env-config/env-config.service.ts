@@ -55,8 +55,8 @@ export class EnvConfigService implements EnvConfig {
   getNodeEnv(): string {
     return this.envConfigService.get<string>('NODE_ENV') as string;
   }
-  getAllowedOrigins(): string[] {
-    return (this.envConfigService.get<string>('ALLOWED_ORIGINS')as string).split(',');
+  getAllowedOrigins(): string {
+    return this.envConfigService.get<string>('ALLOWED_ORIGINS') as string;
   }
 
   getPort(): number {

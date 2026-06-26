@@ -8,16 +8,16 @@ import { UserModule } from '@/core/user/infra/user.module';
 import { HashModule } from '@/shared/infra/hash/hash.module';
 import { RoleModule } from '@/core/role/infra/role.module';
 import { PlanModule } from '@/core/plan/infra/plan.module';
-import { CityModule } from '@/core/cities/infra/city.module';
 import { CreateCompanyUseCase } from '../application/usecase/create-company.usecase';
 import { CompanyRepository } from '../domain/repositories/company.repository';
 import { PlanRepository } from '@/core/plan/domain/repositories/plan.repository';
 import { AddressRepository } from '@/core/address/domain/repositories/address.repository';
 import { UserRepository } from '@/core/user/domain/repositories/user.repository';
-import { CityRepository } from '@/core/cities/domain/repositories/city.repository';
 import { RoleRepository } from '@/core/role/domain/repositories/role.repository';
 import { HashService } from '@/shared/application/hash/hash.service';
 import { CompanyController } from './controllers/company.controller';
+import { CityModule } from '@/core/city/infra/city.module';
+import { CityRepository } from '@/core/city/domain/repositories/city.repository';
 
 @Module({
   imports: [

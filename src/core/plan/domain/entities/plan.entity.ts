@@ -59,6 +59,7 @@ export class Plan extends BaseEntity<PlanProps> {
     const isValid = validator.validate(this.props);
 
     if (!isValid) {
+      console.log('Plan validate errors:', JSON.stringify(validator.errors))
       throw new EntityValidationError(validator.errors);
     }
   }

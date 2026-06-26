@@ -5,6 +5,7 @@ import { PlanSchema } from "../../schema/plan.schema";
 @Injectable()
 export class PlanMapper {
   static toEntity(schema: PlanSchema): Plan {
+    console.log('PlanMapper.toEntity schema:', JSON.stringify(schema))
     return new Plan({
       id: schema.id,
       name: schema.name,
@@ -27,7 +28,7 @@ export class PlanMapper {
       price: entity.price,
       description: entity.description,
       active: entity.active,
-      duration: entity.description,
+      duration: entity.duration,
       createdAt: entity.auditable?.createdAt,
       updatedAt: entity.auditable?.updatedAt,
       deletedAt: entity.auditable?.deletedAt,

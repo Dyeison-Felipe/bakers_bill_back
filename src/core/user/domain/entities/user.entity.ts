@@ -1,4 +1,3 @@
-import { UserPersmissionEntity } from '@/core/user-permissions/domain/entities/user-permission.entity';
 import { ID_USER_DEFAULT } from '@/shared/application/constants/id-user-default';
 import { Data } from '@/shared/domain/decorators/data.decorator';
 import { BaseEntity } from '@/shared/domain/entity/base-entity';
@@ -6,6 +5,7 @@ import { UserValidatorFactory } from '../validators/user-validator';
 import { EntityValidationError } from '@/shared/application/errors/validation-error';
 import { Role } from '@/core/role/domain/entities/role.entity';
 import { Company } from '@/core/company/domain/entities/company.entity';
+import { UserPersmissionEntity } from '@/core/user-permission/domain/entities/user-permission.entity';
 
 export type UserProps = {
   username: string;

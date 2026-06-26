@@ -1,16 +1,12 @@
-import { CitySchema } from '@/core/cities/infra/database/typeorm/schema/city.schema';
+import { CitySchema } from '@/core/city/infra/database/typeorm/schema/city.schema';
 import { CompanySchema } from '@/core/company/infra/database/typeorm/schema/company.schema';
-import { UserSchema } from '@/core/user/infra/database/typeorm/schema/user.schema';
 import { BaseSchema } from '@/shared/infra/database/typeorm/schema/baseSchema/baseSchema';
 import {
   Column,
-  CreateDateColumn,
-  DeleteDateColumn,
   Entity,
   JoinColumn,
   ManyToOne,
   OneToOne,
-  UpdateDateColumn,
 } from 'typeorm';
 
 @Entity('address')

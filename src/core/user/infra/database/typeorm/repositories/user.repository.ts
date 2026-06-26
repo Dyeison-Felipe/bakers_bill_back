@@ -26,12 +26,7 @@ export class UserRepositoryImpl implements UserRepository {
   async findByIdWithPermissions(id: string): Promise<UserEntity | null> {
     const userSchema = await this.userRepository.findOne({
       where: { id },
-      relations: [
-        'userPermissions',
-        'userPermissions.permission',
-        'role',
-        'company',
-      ],
+      relations: this.getRelations(),
     });
 
     if (!userSchema) return null;
@@ -67,12 +62,7 @@ export class UserRepositoryImpl implements UserRepository {
   async findById(id: string): Promise<UserEntity | null> {
     const userSchema = await this.userRepository.findOne({
       where: { id },
-      relations: [
-        'userPermissions',
-        'userPermissions.permission',
-        'role',
-        'company',
-      ],
+      relations: this.getRelations(),
     });
 
     if (!userSchema) return null;
@@ -114,7 +104,11 @@ export class UserRepositoryImpl implements UserRepository {
             state: true,
           },
         },
-        plan: true,
+        plan: {
+          planPermission: {
+            persmission: true
+          }
+        },
       },
       userPermissions: {
         permission: true,

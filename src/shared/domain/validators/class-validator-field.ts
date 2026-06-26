@@ -11,6 +11,8 @@ export abstract class ClassValidatorFields<
   validate(data: any): boolean {
     const errors = validateSync(data);
 
+    console.log('validateSync errors:', JSON.stringify(errors))
+
     if (errors.length) {
       this.errors = {};
 

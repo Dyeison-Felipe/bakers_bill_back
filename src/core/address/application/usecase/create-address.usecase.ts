@@ -4,11 +4,11 @@ import { CreateAddressOutput } from '@/shared/application/output/address/create-
 import { UseCase } from '@/shared/application/usecase/usecase';
 import { Inject } from '@nestjs/common';
 import { AddressRepository } from '../../domain/repositories/address.repository';
-import { CityRepository } from '@/core/cities/domain/repositories/city.repository';
 import { Transactional } from '@/shared/infra/database/typeorm/decorators/transactional.decorator';
 import { NotFoundError } from '@/shared/application/errors/not-found-error';
 import { Address } from '../../domain/entities/address.entity';
 import { ID_USER_DEFAULT } from '@/shared/application/constants/id-user-default';
+import { CityRepository } from '@/core/city/domain/repositories/city.repository';
 
 type Input = CreateAddressInput;
 

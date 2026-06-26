@@ -1,9 +1,9 @@
-import { Permission } from '@/core/permissions/domain/entity/permission.entity';
-import { Plan } from '@/core/plan/domain/entities/plan.entity';
 import { Data } from '@/shared/domain/decorators/data.decorator';
 import { BaseEntity } from '@/shared/domain/entity/base-entity';
 import { PlanPermissionValidatorFactory } from '../validators/plan-permission-validator';
 import { EntityValidationError } from '@/shared/application/errors/validation-error';
+import { Permission } from '@/core/permission/domain/entity/permission.entity';
+import { Plan } from '@/core/plan/domain/entities/plan.entity';
 
 export type PlanPermissionProps = {
   plan: Plan;

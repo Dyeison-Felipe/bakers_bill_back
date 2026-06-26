@@ -7,10 +7,10 @@ import { AddressController } from './controllers/address.controller';
 import { CreateAddressUseCase } from '../application/usecase/create-address.usecase';
 import { AddressRepository } from '../domain/repositories/address.repository';
 import { UpdateAddressUseCase } from '../application/usecase/update-address.usecase';
-import { CityModule } from '@/core/cities/infra/city.module';
 import { PROVIDERS } from '@/shared/application/constants/providers';
-import { CityRepository } from '@/core/cities/domain/repositories/city.repository';
 import { FindAddressByCompanyIdUseCase } from '../application/usecase/find-address-by-id.usecase';
+import { CityModule } from '@/core/city/infra/city.module';
+import { CityRepository } from '@/core/city/domain/repositories/city.repository';
 
 @Module({
   imports: [TypeOrmModule.forFeature([AddressSchema]), CityModule],

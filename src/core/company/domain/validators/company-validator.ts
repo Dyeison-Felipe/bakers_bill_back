@@ -40,7 +40,7 @@ export class CompanyRules {
 
   @IsString()
   @MaxLength(255)
-  @IsNotEmpty()
+  @IsOptional()
   logotipo: string;
 
   @IsBoolean()

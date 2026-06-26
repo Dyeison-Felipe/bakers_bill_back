@@ -21,11 +21,15 @@ export class PlanRules {
 
   @IsNumber()
   @IsNotEmpty()
-  price: string;
+  price: number;
 
   @IsBoolean()
   @IsNotEmpty()
   active: boolean;
+
+  @IsString()
+  @IsNotEmpty()
+  duration: string;
 
   constructor(data: PlanProps) {
     Object.assign(this, data);

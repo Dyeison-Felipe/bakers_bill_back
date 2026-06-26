@@ -1,7 +1,7 @@
 import { PlanPermission } from '@/core/plan-permission/domain/entity/plan-permission.entity';
 import { PlanPermissionSchema } from '../schema/plan-permission.schema';
-import { PermissionMappper } from '@/core/permissions/infra/database/typeorm/repositories/mapper/permission.mapper';
 import { PlanMapper } from '@/core/plan/infra/database/typeorm/repositories/mapper/plan-mapper';
+import { PermissionMappper } from '@/core/permission/infra/database/typeorm/repositories/mapper/permission.mapper';
 
 export class PlanPermissionMapper {
   static toEntity(schema: PlanPermissionSchema): PlanPermission {

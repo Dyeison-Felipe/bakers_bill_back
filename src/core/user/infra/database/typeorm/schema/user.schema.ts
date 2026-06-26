@@ -1,7 +1,6 @@
 import { CompanySchema } from '@/core/company/infra/database/typeorm/schema/company.schema';
-import { PermissionSchema } from '@/core/permissions/infra/database/typeorm/schema/permission.schema';
 import { RoleSchema } from '@/core/role/infra/database/typeorm/schema/role.schema';
-import { UserPermissionSchema } from '@/core/user-permissions/infra/database/typeorm/schema/user-permission.schema';
+import { UserPermissionSchema } from '@/core/user-permission/infra/database/typeorm/schema/user-permission.schema';
 import { BaseSchema } from '@/shared/infra/database/typeorm/schema/baseSchema/baseSchema';
 import { Column, Entity, JoinColumn, ManyToOne, OneToMany } from 'typeorm';
 

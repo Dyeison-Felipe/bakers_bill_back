@@ -3,14 +3,10 @@ import { EnvConfigModule } from './shared/infra/env-config/env-config.module';
 import { DatabaseModule } from './shared/infra/database/typeorm/database.module';
 import { HashModule } from './shared/infra/hash/hash.module';
 import { AddressModule } from '@/core/address/infra/address.module';
-import { StateModule } from '@/core/states/infra/state.module';
-import { CityModule } from '@/core/cities/infra/city.module';
 import { UserModule } from '@/core/user/infra/user.module';
 import { AuthModule } from '@/core/auth/infra/auth.module';
 import { JwtConfigModule } from '@/shared/infra/jwt/jwt.module';
-import { PermissionModule } from '@/core/permissions/infra/permission.module';
 import { LoggedUserModule } from '@/shared/infra/logged-user/logged-user.module';
-import { UserPermissionModule } from './core/user-permissions/infra/user-permission.module';
 import { APP_GUARD } from '@nestjs/core';
 import { PermissionGuard } from './core/auth/infra/guard/permission.guard';
 import { MailModule } from './shared/infra/mail/mail.module';
@@ -18,6 +14,10 @@ import { CompanyModule } from './core/company/infra/company.module';
 import { PlanModule } from './core/plan/infra/plan.module';
 import { RoleModule } from './core/role/infra/role.module';
 import { PlanPermissionModule } from './core/plan-permission/infra/plan-permission.module';
+import { StateModule } from './core/state/infra/state.module';
+import { CityModule } from './core/city/infra/city.module';
+import { PermissionModule } from './core/permission/infra/permission.module';
+import { UserPermissionModule } from './core/user-permission/infra/user-permission.module';
 
 @Module({
   imports: [

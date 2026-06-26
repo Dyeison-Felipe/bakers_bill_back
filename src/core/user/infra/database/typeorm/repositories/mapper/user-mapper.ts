@@ -1,9 +1,9 @@
 import { Injectable } from '@nestjs/common';
 import { UserSchema } from '../../schema/user.schema';
 import { UserEntity } from '@/core/user/domain/entities/user.entity';
-import { UserPermissionRepositoryMapper } from '@/core/user-permissions/infra/database/typeorm/repositories/mapper/user-permission-repository.mapper';
 import { RoleRepositoryMapper } from '@/core/role/infra/database/typeorm/repository/role.mapper';
 import { CompanyRepositoryMapper } from '@/core/company/infra/database/typeorm/repository/company-repository.mapper';
+import { UserPermissionRepositoryMapper } from '@/core/user-permission/infra/database/typeorm/repositories/mapper/user-permission-repository.mapper';
 
 @Injectable()
 export class UserRepositoryMapper {

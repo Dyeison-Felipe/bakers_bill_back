@@ -9,14 +9,14 @@ import { CreateUserInput } from '@/shared/application/input/users/create-user.in
 import { CreateUserOutput } from '@/shared/application/output/users/create-user.output';
 import { UseCase } from '@/shared/application/usecase/usecase';
 import { LoggedUserService } from '@/shared/application/logged-user/logged-user.service';
-import { UserPermissionRepository } from '@/core/user-permissions/domain/repositories/user-permission.repository';
-import { PermissionRepository } from '@/core/permissions/domain/repositories/permission.repository';
-import { Permission } from '@/core/permissions/domain/entity/permission.entity';
-import { UserPersmissionEntity } from '@/core/user-permissions/domain/entities/user-permission.entity';
 import { NotFoundError } from '@/shared/application/errors/not-found-error';
 import { BadRequestError } from '@/shared/application/errors/bad-request-error';
 import { Transactional } from '@/shared/infra/database/typeorm/decorators/transactional.decorator';
 import { RoleRepository } from '@/core/role/domain/repositories/role.repository';
+import { UserPermissionRepository } from '@/core/user-permission/domain/repositories/user-permission.repository';
+import { PermissionRepository } from '@/core/permission/domain/repositories/permission.repository';
+import { UserPersmissionEntity } from '@/core/user-permission/domain/entities/user-permission.entity';
+import { Permission } from '@/core/permission/domain/entity/permission.entity';
 
 type Input = CreateUserInput;
 

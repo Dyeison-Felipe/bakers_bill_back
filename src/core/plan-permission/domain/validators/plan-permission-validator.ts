@@ -6,8 +6,8 @@ import { Type } from 'class-transformer';
 import { RoleRules } from '@/core/role/domain/validators/role-validators';
 import { CompanyRules } from '@/core/company/domain/validators/company-validator';
 import { PlanRules } from '@/core/plan/domain/validators/plan-validate';
-import { PermissionRules } from '@/core/permissions/domain/validators/permission-validator';
 import { PlanPermissionProps } from '../entity/plan-permission.entity';
+import { PermissionRules } from '@/core/permission/domain/validators/permission-validator';
 
 export class PlanPermissionRules {
   @Type(() => RoleRules)

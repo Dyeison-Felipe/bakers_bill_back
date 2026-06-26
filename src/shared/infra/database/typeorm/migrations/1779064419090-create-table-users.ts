@@ -115,7 +115,7 @@ export class CreateTableUsers1779064419090 implements MigrationInterface {
         '${ID_USER_DEFAULT}',
         'system',
         'system@system.com',
-        '$2b$10$Tb521IWDL7F18DGI6rDZr.A0NaOu1hkHyFuHbotlem/PBh7Y0oSnK',
+        '$2b$10$EeITJwagi5A/epEgdEBX8.nPnd.eyFP4BUerCrfykhPZNLOmFJR.O',
         true,
         'e4eebc99-9c0b-4ef8-bb6d-6bb9bd380a55',
         'd3eebc99-9c0b-4ef8-bb6d-6bb9bd380a44',

@@ -9,6 +9,7 @@ import { FindAllPlanUseCase } from "../../application/usecase/find-all-plan.usec
 import { ConvertPresenter } from "@/shared/infra/presenter/converter/converter.presenter";
 import { FindAllPlanPresenter } from "@/shared/infra/presenter/plan/find-all-plan.presenter";
 import { DeletePlanUseCase } from "../../application/usecase/delete.usecase";
+import { Public } from "@/shared/infra/decorators/permission.decorator";
 
 @Controller('v1/plan')
 export class PlanController {
@@ -19,6 +20,7 @@ export class PlanController {
   @Post()
   async create(@Body() dto: CreatePlanDto): Promise<CreatePlanPresenter> {
     return await this.createPlanUseCase.execute(dto);
+    
   }
 
   @Put()
@@ -27,6 +29,7 @@ export class PlanController {
   }
 
   @Get()
+  @Public()
   async findAll(): Promise<FindAllPlanPresenter[]> {
     const output = await this.findAllPlanUseCase.execute();
 

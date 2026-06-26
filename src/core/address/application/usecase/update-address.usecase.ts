@@ -3,12 +3,12 @@ import { UpdateAddressInput } from "@/shared/application/input/address/update-ad
 import { UpdateAddressOutput } from "@/shared/application/output/address/update-address.output";
 import { UseCase } from "@/shared/application/usecase/usecase";
 import { AddressRepository } from "../../domain/repositories/address.repository";
-import { CityRepository } from "@/core/cities/domain/repositories/city.repository";
 import { Inject } from "@nestjs/common";
 import { Transactional } from "@/shared/infra/database/typeorm/decorators/transactional.decorator";
 import { NotFoundError } from "@/shared/application/errors/not-found-error";
 import { Address } from "../../domain/entities/address.entity";
-import { CityEntity } from "@/core/cities/domain/entities/city.entity";
+import { CityRepository } from "@/core/city/domain/repositories/city.repository";
+import { CityEntity } from "@/core/city/domain/entities/city.entity";
 
 type Input = UpdateAddressInput;
 

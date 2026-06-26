@@ -1,5 +1,4 @@
 import { Global, Module } from '@nestjs/common';
-import { UserRepositoryMapper } from './database/typeorm/repositories/mapper/user-mapper';
 import { PROVIDERS } from '@/shared/application/constants/providers';
 import { UserRepositoryImpl } from './database/typeorm/repositories/user.repository';
 import { HashModule } from '@/shared/infra/hash/hash.module';
@@ -10,10 +9,6 @@ import { UserController } from './controllers/user.controller';
 import { TypeOrmModule } from '@nestjs/typeorm';
 import { UserSchema } from './database/typeorm/schema/user.schema';
 import { LoggedUserService } from '@/shared/application/logged-user/logged-user.service';
-import { UserPermissionRepository } from '@/core/user-permissions/domain/repositories/user-permission.repository';
-import { PermissionRepository } from '@/core/permissions/domain/repositories/permission.repository';
-import { PermissionModule } from '@/core/permissions/infra/permission.module';
-import { UserPermissionModule } from '@/core/user-permissions/infra/user-permission.module';
 import { UpdateUserUseCase } from '../application/usecase/update-user.usecase';
 import { InactivateUserUseCase } from '../application/usecase/inactivate-user.usecase';
 import { UpdateUserPasswordUseCase } from '../application/usecase/update-user-password.usecase';
@@ -22,6 +17,10 @@ import { JwtService } from '@/shared/application/jwt/jwt.service';
 import { RoleModule } from '@/core/role/infra/role.module';
 import { RoleRepository } from '@/core/role/domain/repositories/role.repository';
 import { UserQueryImpl } from './database/queries/user.query';
+import { PermissionModule } from '@/core/permission/infra/permission.module';
+import { UserPermissionModule } from '@/core/user-permission/infra/user-permission.module';
+import { UserPermissionRepository } from '@/core/user-permission/domain/repositories/user-permission.repository';
+import { PermissionRepository } from '@/core/permission/domain/repositories/permission.repository';
 
 @Global()
 @Module({

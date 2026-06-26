@@ -9,7 +9,6 @@ import { ConflictError } from '@/shared/application/errors/conflict-error';
 import { NotFoundError } from '@/shared/application/errors/not-found-error';
 import { UserRepository } from '@/core/user/domain/repositories/user.repository';
 import { Address } from '@/core/address/domain/entities/address.entity';
-import { CityRepository } from '@/core/cities/domain/repositories/city.repository';
 import { ID_USER_DEFAULT } from '@/shared/application/constants/id-user-default';
 import { Company } from '../../domain/entities/company.entity';
 import { Transactional } from '@/shared/infra/database/typeorm/decorators/transactional.decorator';
@@ -20,6 +19,7 @@ import { UserEntity } from '@/core/user/domain/entities/user.entity';
 import { HashService } from '@/shared/application/hash/hash.service';
 import { getErrorStack } from '@/shared/application/helpers/error.helper';
 import { CreateCompanyOutput } from '@/shared/application/output/company/create-company-output';
+import { CityRepository } from '@/core/city/domain/repositories/city.repository';
 
 type UserInput = {
   username: string;

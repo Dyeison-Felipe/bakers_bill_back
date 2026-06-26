@@ -1,4 +1,4 @@
-import { PermissionSchema } from '@/core/permissions/infra/database/typeorm/schema/permission.schema';
+import { PermissionSchema } from '@/core/permission/infra/database/typeorm/schema/permission.schema';
 import { PlanSchema } from '@/core/plan/infra/database/typeorm/schema/plan.schema';
 import { BaseSchema } from '@/shared/infra/database/typeorm/schema/baseSchema/baseSchema';
 import { Column, Entity, JoinColumn, ManyToOne } from 'typeorm';

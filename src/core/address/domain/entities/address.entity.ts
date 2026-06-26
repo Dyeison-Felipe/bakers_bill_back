@@ -1,9 +1,9 @@
-import { CityEntity } from '@/core/cities/domain/entities/city.entity';
 import { ID_USER_DEFAULT } from '@/shared/application/constants/id-user-default';
 import { Data } from '@/shared/domain/decorators/data.decorator';
 import { BaseEntity } from '@/shared/domain/entity/base-entity';
 import { AddressValidatorFactory } from '../validators/address-validator';
 import { EntityValidationError } from '@/shared/application/errors/validation-error';
+import { CityEntity } from '@/core/city/domain/entities/city.entity';
 
 export type AddressProps = {
   cep?: string | null;
