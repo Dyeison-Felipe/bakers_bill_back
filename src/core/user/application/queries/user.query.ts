@@ -1,13 +1,9 @@
-import { Role } from "@/core/role/domain/entities/role.entity";
-import { UserEntity } from "../../domain/entities/user.entity";
-import { Company } from "@/core/company/domain/entities/company.entity";
-
-export type PermissionUser = {
-    id: string;
-    action: string;
-    subject: string;
-    description: string;
-  }
+export type Permissions = {
+  id: string;
+  action: string;
+  subject: string;
+  description: string;
+};
 
 export type UserByLogin = {
   id: string;
@@ -16,9 +12,37 @@ export type UserByLogin = {
   email: string;
   active: boolean;
   role: string;
-  permissions?: PermissionUser[] | null;
+  permissions?: Permissions[] | null;
+};
+
+type Plan = {
+  id: string;
+  name: string;
+  price: number;
+  duration: string;
+  permissions: Permissions[];
+};
+
+type Company = {
+  id: string;
+  cnpj: string;
+  stateRegistration: string;
+  fantasyName: string;
+  socialReazon: string;
+  plan: Plan;
+};
+
+export type UserGuard = {
+  id: string;
+  username: string;
+  email: string;
+  active: boolean;
+  role: string;
+  company: Company;
+  permissions: Permissions[];
 };
 
 export interface UserQuery {
   findUserByEmail(email: string): Promise<UserByLogin | null>;
+  findUserGuardBySub(sub: string): Promise<UserGuard | null>;
 }

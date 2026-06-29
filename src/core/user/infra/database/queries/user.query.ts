@@ -3,6 +3,7 @@ import { UserSchema } from '../typeorm/schema/user.schema';
 import { InjectRepository } from '@nestjs/typeorm';
 import {
   UserByLogin,
+  UserGuard,
   UserQuery,
 } from '@/core/user/application/queries/user.query';
 
@@ -11,6 +12,85 @@ export class UserQueryImpl implements UserQuery {
     @InjectRepository(UserSchema)
     private readonly userRepository: Repository<UserSchema>,
   ) {}
+
+  async findUserGuardBySub(sub: string): Promise<UserGuard | null> {
+    const result = await this.userRepository
+      .createQueryBuilder('user')
+      .leftJoin('user.role', 'role')
+      .leftJoin('user.company', 'company')
+      .leftJoin('company.plan', 'plan')
+      .leftJoin('plan.planPermission', 'planPermission') // nome correto da propriedade
+      .leftJoin('planPermission.permission', 'planPerm') // alias diferente
+      .leftJoin('user.userPermissions', 'userPermissions')
+      .leftJoin('userPermissions.permission', 'userPerm')
+      .select([
+        'user.id',
+        'user.email',
+        'user.username',
+        'user.active',
+        'role.name',
+        'company.id',
+        'company.cnpj',
+        'company.stateRegistration',
+        'company.fantasyName',
+        'company.socialReazon',
+        'plan.id',
+        'plan.name',
+        'plan.price',
+        'plan.duration',
+        'planPermission.id',
+        'planPerm.id',
+        'planPerm.action',
+        'planPerm.subject',
+        'planPerm.description',
+        'userPermissions.id',
+        'userPerm.id',
+        'userPerm.action',
+        'userPerm.subject',
+        'userPerm.description',
+      ])
+      .where('user.id = :sub', { sub })
+      .getOne();
+
+    if (!result) return null;
+
+    const user: UserGuard = {
+      id: result.id,
+      username: result.username,
+      email: result.email,
+      active: result.active,
+      role: result.role.name,
+      company: {
+        id: result.company.id,
+        cnpj: result.company.cnpj,
+        stateRegistration: result.company.stateRegistration,
+        fantasyName: result.company.fantasyName,
+        socialReazon: result.company.socialReazon,
+        plan: {
+          id: result.company.plan.id,
+          name: result.company.plan.name,
+          price: result.company.plan.price,
+          duration: result.company.plan.duration,
+          permissions:
+            result.company.plan.planPermission?.map((pp) => ({
+              id: pp.permission.id,
+              action: pp.permission.action,
+              subject: pp.permission.subject,
+              description: pp.permission.description,
+            })) ?? [],
+        },
+      },
+      permissions:
+        result.userPermissions?.map((up) => ({
+          id: up.permission.id,
+          action: up.permission.action,
+          subject: up.permission.subject,
+          description: up.permission.description,
+        })) ?? [],
+    };
+
+    return user;
+  }
 
   async findUserByEmail(email: string): Promise<UserByLogin | null> {
     const queryBuilder = await this.userRepository
@@ -46,7 +126,7 @@ export class UserQueryImpl implements UserQuery {
           id: up.permission.id,
           action: up.permission.action,
           subject: up.permission.subject,
-          description: up.permission.description
+          description: up.permission.description,
         })) ?? [],
     };
 
