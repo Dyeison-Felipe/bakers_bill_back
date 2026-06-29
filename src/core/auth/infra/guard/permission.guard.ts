@@ -64,7 +64,7 @@ export class PermissionGuard implements CanActivate {
       request.user = user;
       this.loggedUserService.setLoggedUser(user);
 
-      if (user.role.name === 'Admin' || user.role.name === 'Super Admin') {
+      if (user.role.name === 'Super Admin') {
         return true;
       }
 
@@ -76,6 +76,21 @@ export class PermissionGuard implements CanActivate {
 
       if (!policies || policies.length === 0) return true;
 
+      //5. Verifica se a permissão está inclusa no plano da empresa
+      const planPermissions = user.company.plan.permissions ?? [];
+
+      const allInPlan = policies.every(({ action, resource }) =>
+        planPermissions.some(
+          (p) => p.action === action && p.subject === resource,
+        ),
+      );
+
+      if(!allInPlan) throw new UnauthorizedError('Permissão não inclusa no plano');
+      
+      //6. Verifica role admin da empresa (diferente de Super Admin)
+      if (user.role.name === 'Admin') return true;
+
+      // 7. Usuário comum → verifica permissões individuais com CASL
       const ability = this.caslAbilityService.createForUser(user);
 
       return policies.every(({ action, resource }) =>

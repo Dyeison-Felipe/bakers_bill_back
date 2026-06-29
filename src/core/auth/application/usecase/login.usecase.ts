@@ -69,14 +69,17 @@ export class LoginUseCase implements UseCase<Input, Output> {
     const output: Output = {
       user: {
         id: user.id,
+        username: user.username,
+        email: user.email,
         role: user.role,
         permissions: (user?.permissions ?? []).map((permission) => ({
           id: permission.id,
           action: permission.action,
           subject: permission.subject,
-          description: permission.description
+          description: permission.description,
         })),
       },
+      company: user.company,
       token: token,
     };
 

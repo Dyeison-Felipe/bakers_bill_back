@@ -11,6 +11,7 @@ export type UserByLogin = {
   password: string;
   email: string;
   active: boolean;
+  company: Company
   role: string;
   permissions?: Permissions[] | null;
 };
@@ -29,7 +30,7 @@ type Company = {
   stateRegistration: string;
   fantasyName: string;
   socialReazon: string;
-  plan: Plan;
+  plan?: Plan;
 };
 
 export type UserGuard = {

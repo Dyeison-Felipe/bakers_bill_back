@@ -2,6 +2,7 @@ import { Data } from '@/shared/domain/decorators/data.decorator';
 import { BaseEntity } from '@/shared/domain/entity/base-entity';
 import { PlanValidatorFactory } from '../validators/plan-validate';
 import { EntityValidationError } from '@/shared/application/errors/validation-error';
+import { Permission } from '@/core/permission/domain/entity/permission.entity';
 
 export type PlanProps = {
   name: string;
@@ -9,6 +10,7 @@ export type PlanProps = {
   active: boolean;
   description: string;
   duration: string;
+  permissions?: Permission[]; 
 };
 
 type CreatePlanProps = {

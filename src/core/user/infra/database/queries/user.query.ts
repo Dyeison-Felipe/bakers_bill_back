@@ -13,7 +13,7 @@ export class UserQueryImpl implements UserQuery {
     private readonly userRepository: Repository<UserSchema>,
   ) {}
 
-  async findUserGuardBySub(sub: string): Promise<UserGuard | null> {
+  async findUserGuardBySub(sub: string, email?: string ): Promise<UserGuard | null> {
     const result = await this.userRepository
       .createQueryBuilder('user')
       .leftJoin('user.role', 'role')
@@ -50,6 +50,7 @@ export class UserQueryImpl implements UserQuery {
         'userPerm.description',
       ])
       .where('user.id = :sub', { sub })
+      .orWhere('user.email = :email', { email })
       .getOne();
 
     if (!result) return null;
@@ -98,6 +99,7 @@ export class UserQueryImpl implements UserQuery {
       .leftJoin('user.role', 'role')
       .leftJoin('user.userPermissions', 'userPermissions')
       .leftJoin('userPermissions.permission', 'permission')
+      .leftJoin('user.company', 'company')
       .select([
         'user.id',
         'user.email',
@@ -105,6 +107,11 @@ export class UserQueryImpl implements UserQuery {
         'user.username',
         'user.active',
         'role.name',
+        'company.id',
+        'company.fantasyName',
+        'company.socialReazon',
+        'company.cnpj',
+        'company.stateRegistration',
         'permission.id',
         'permission.action',
         'permission.subject',
@@ -121,6 +128,13 @@ export class UserQueryImpl implements UserQuery {
       password: queryBuilder.password,
       active: queryBuilder.active,
       role: queryBuilder.role.name,
+      company: {
+        id: queryBuilder.company.id,
+        cnpj: queryBuilder.company.cnpj,
+        stateRegistration: queryBuilder.company.stateRegistration,
+        socialReazon: queryBuilder.company.socialReazon,
+        fantasyName: queryBuilder.company.fantasyName,
+      },
       permissions:
         queryBuilder.userPermissions?.map((up) => ({
           id: up.permission.id,
