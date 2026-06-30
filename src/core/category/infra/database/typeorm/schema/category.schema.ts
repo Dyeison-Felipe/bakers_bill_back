@@ -7,6 +7,19 @@ export class CategorySchema extends BaseSchema {
   @Column({ name: 'name', nullable: false, type: 'varchar', length: 255 })
   name: string;
 
+  @Column({ name: 'created_by', type: 'uuid', nullable: false })
+  createdBy: string;
+
+  @Column({ name: 'updated_by', type: 'uuid', nullable: false })
+  updatedBy: string;
+
+  @Column({
+    name: 'deleted_by',
+    type: 'uuid',
+    nullable: true,
+  })
+  deletedBy: string | null;
+
   @ManyToOne(() => CompanySchema, (company) => company.category)
   @JoinColumn({ name: 'company' })
   company: CompanySchema;

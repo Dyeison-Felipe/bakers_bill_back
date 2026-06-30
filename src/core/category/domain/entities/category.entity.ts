@@ -17,14 +17,14 @@ export type CategoryProps = {
 type CreateCategoryProps = {
   name: string;
   company: Company;
-  parent?: Category | null;
+  parent: Category | null;
   createdBy: string;
   updatedBy: string;
 };
 
 type UpdateCategoryProps = {
   name: string;
-  parent?: Category | null;
+  parent: Category | null;
   updatedBy: string;
 };
 
