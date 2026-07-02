@@ -6,7 +6,7 @@ import { CategoryValidatorFactory } from '../validators/category-validator';
 
 export type CategoryProps = {
   name: string;
-  company?: Company;
+  company: Company;
   parent?: Category | null;
   children?: Category[];
   createdBy: string;
@@ -16,7 +16,7 @@ export type CategoryProps = {
 
 type CreateCategoryProps = {
   name: string;
-  company?: Company;
+  company: Company;
   parent: Category | null;
   createdBy: string;
   updatedBy: string;

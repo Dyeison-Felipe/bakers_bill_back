@@ -1,7 +1,7 @@
 {
 	"configurations": [
 		{
-			"name": "PanMetrics debug",
+			"name": "Bakers Bills debug",
 			"type": "node",
 			"request": "attach",
 			"port": 9229,
